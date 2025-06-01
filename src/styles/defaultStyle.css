@@ -1,0 +1,285 @@
+/* [IMPORTS] */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/*
+
+*****************     TABLE  OF  CONTENTS     *****************
+
+- Use CTRL + F or Command (⌘) + F and "[NAME]" without ""
+- Then click on the downward arrow " ↓ " to navigate to it.
+
+* [IMPORTS]
+* [VARIABLES]
+* [RESETS]
+* [GENERAL STYLING]
+* [JS CLASS]
+
+*/
+
+/* [VARIABLES] */
+
+:root {
+  /* Colors */
+  --color-primary: #FFFFFF;               /* Main background color */
+  --color-primary-dark: #000000;          /* Font color, Navbar, Buttons */
+  --color-primary-gray: #EFEFEF;          /* Img + Section background color */
+  --color-primary-gray-alt: #D9D9D9;      /* Text-box + Footer background color */
+  --color-secondary: #FFD300;             /* CTA Buttons */
+  --color-secondary-alt: #D8A929;         /* Outline Buttons */
+  --color-tertiary: #402D7A;              /* CTA Buttons, Font Color */
+  --color-tertiary-alt: #2E2058;          /* Outline Buttons */
+  /* Fonts */
+  --font-family-sans: "Inter",  sans-serif; /* Used for all text */
+  /* Font Sizes */
+  --fs-xsm: clamp(0.64rem, -0.01vi + 0.64rem, 0.63rem);
+  --fs-sm: clamp(0.8rem, 0.08vi + 0.78rem, 0.84rem);
+  --fs-base: clamp(1rem, 0.22vi + 0.95rem, 1.13rem);
+  --fs-md: clamp(1.25rem, 0.43vi + 1.15rem, 1.5rem);
+  --fs-lg: clamp(1.56rem, 0.76vi + 1.39rem, 2rem);
+  --fs-xl: clamp(1.95rem, 1.24vi + 1.67rem, 2.66rem);
+  --fs-2xl: clamp(2.44rem, 1.93vi + 2.01rem, 3.55rem);
+  --fs-3xl: clamp(3.05rem, 2.93vi + 2.39rem, 4.73rem);
+  --fs-4xl: clamp(3.81rem, 4.34vi + 2.84rem, 6.31rem);
+  /* Spacing Variables */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 5rem;
+}
+
+/* [RESETS] */
+
+/* Everything in HTML remains in Border-Box, even in alternate states */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Resets default Margin and Padding to 0 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Smooth Scrolling when (and if) you scroll */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Resets input, btn, textarea and select default properties found in Firefox Defaults list */
+input,
+button,
+textarea,
+select {
+  appearance: auto;
+  display: inline-block;
+  border: none;
+  background: none;
+  outline: none;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
+/* Removes focus-effect (outline-effect) of input, select, btn and textarea */
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+  outline: none;
+}
+
+/****** Removes "up / down" icon on input of type="number" ********/
+/* For Chrome, Safari, and Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* 
+  - Makes text-decoration on links not go through letters like "g"
+  - Removes underline on links
+*/
+a {
+  text-decoration-skip-ink: auto;
+  text-decoration: none;
+}
+
+/* 
+  - Sets the default color of links in various states to be the color specified in other rulesets / parent elements
+  - Disabled by default (uncomment to enable if needed)  
+*/
+/* 
+a:visited,
+a:active,
+a:hover {
+  color: initial;
+}
+*/
+
+/* Removes list-style bulletpoints etc. */
+li {
+  list-style: none;
+}
+
+/* [GENERAL STYLING] */
+
+/* No sideways scroll, scroll on y-axis when overflow, height 100% of parent*/
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* Body has min-height at 100vh (takes up full height of viewport), and content is flexed, in column direction */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 
+- Flex and center contents within main. Flex grow to fill whitespace (if there is any, e.g. below footer)
+- Gap between elements, add padding to main container
+- Enable y-axis scroll, add background color
+*/
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: var(--space-lg);
+  padding: var(--space-md);
+  padding-bottom: var(--space-2xl);
+  overflow-y: auto;
+  background-color: var(--color-primary);
+}
+
+/* Imgs cannot have a bigger width than 100% of parent container, are block elements and cover all of their available space. */
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* 
+  - Standard styling for icons
+  - Cursor is a pointer when hovering over (to make it look like it is clickable)
+  - Display is inline-block - 
+  - (to make it behave like a block element, but still be inline, so it can be placed in text without breaking the line)
+  - Background size is set to contain (so it doesn't stretch the icon)
+  - Background repeat is set to no-repeat (so it doesn't repeat the icon)
+  - Background position is set to center (so it is centered in the icon container)
+*/
+i {
+  cursor: pointer;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 
+  - Default Heading and Bodytext behavior 
+  - Text will wrap, if it can't fit its full width in the container
+  - Overflow will break words, so they don't overflow the container 
+  - Hyphens will be added to words that are too long to fit in the container
+  - Line height is set to 150% (1.5x the font size) (in accordance to WebDev book we are using)
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 150%;
+}
+
+/* Links and Headings Font Family */
+a,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-sans);
+}
+
+/* Bodytext Font Family and Size */
+p {
+  font-family: var(--font-family-sans);
+  font-size: var(--fs-base);
+}
+
+/* Font family for input, button, select, textarea */
+input,
+button,
+select,
+textarea {
+  font-family: var(--font-family-sans);
+}
+
+/* Label Font Styling (Display : Inline-Block so it doesn't break other texts) */
+label {
+  display: inline-block;
+  font-family: var(--font-family-sans);
+}
+
+/* Set all cursors to be pointers on btns and selects */
+button, select {
+  cursor: pointer;
+}
+
+/* [JS CLASS] */
+
+/* Hides content, default state of toggleable*/
+.toggleable {
+  display: none;
+  transition: all 1s ease-in-out;
+}
+
+/* Shows content when toggleable is in active state */
+.toggleable.active {
+  display: block;
+  transition: all 1s ease-in-out;
+}
+
+/* Hides content */
+.hideElement {
+  display: none;
+  transition: all 1s ease-in-out;
+}
+
+/* Shows content */
+.showElement {
+  display: block;
+  transition: all 1s ease-in-out;
+}
+
+/* Fades In content */
+.fadeIn {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Fades Out content */
+.fadeOut {
+  opacity: 1;
+  visibility: visible;
+}
