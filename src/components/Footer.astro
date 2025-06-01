@@ -1,0 +1,187 @@
+---
+
+---
+
+<footer>
+  <div class="footerContainer">
+    <div class="flex_col">
+      <div class="textContainer">
+        <h6>Kontakt</h6>
+        <p><span>Man - Fre: </span>9:00 - 16:00</p>
+        <p><span>Weekend & Helligdage: </span>Lukket</p>
+      </div>
+      <div class="paymentOptions">
+        <i class="cardIcon"></i>
+        <i class="cardIcon"></i>
+        <i class="cardIcon"></i>
+        <i class="cardIcon"></i>
+      </div>
+    </div>
+    <div class="flex_col">
+      <h6>Links</h6>
+      <div class="linksContainer">
+        <a href="/productlist.html">Dame</a>
+        <a href="/productlist.html">Herre</a>
+        <a href="/productlist.html">Sport</a>
+        <a href="/productlist.html">Sport</a>
+        <a href="/productlist.html">Dame</a>
+        <a href="/productlist.html">Herre</a>
+        <a href="/productlist.html">Sport</a>
+        <a href="/productlist.html">Sport</a>
+      </div>
+    </div>
+    <div class="paymentOptionsMobile">
+      <i class="cardIcon"></i>
+      <i class="cardIcon"></i>
+      <i class="cardIcon"></i>
+      <i class="cardIcon"></i>
+    </div>
+    <div class="flex_col">
+      <h6>Følg os</h6>
+      <div class="socialContainer">
+        <a href="https://www.facebook.com/bareentshirt" target="_blank" aria-label="Facebook Link"><i class="facebookIcon"></i></a>
+        <a href="https://www.instagram.com/bareen/" target="_blank" aria-label="Instagram Link"><i class="instagramIcon"></i></a>
+      </div>
+    </div>
+    <a href="/index.html" class="footerLogo"><img src="/images/svgs/bareenLogoDark.svg" alt="Logo" /></a>
+  </div>
+</footer>
+
+<style>
+  /*****    Container Styling    *****/
+  footer {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-primary-gray-alt);
+  }
+  .footerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1920px;
+    padding: 2rem 1rem 4rem;
+    margin: 0 auto;
+  }
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .paymentOptions {
+    display: none;
+  }
+  .linksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .paymentOptionsMobile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 31ch;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .socialContainer {
+    display: flex;
+    gap: 1rem;
+  }
+  .footerLogo {
+    align-self: center;
+  }
+  /*****    Flex Styling    *****/
+  .flex_col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 31ch;
+    margin: 0 auto;
+  }
+  /*****    Text Styling    *****/
+  h6 {
+    font-size: var(--fs-md);
+    color: var(--color-tertiary-alt);
+  }
+  span {
+    font-weight: bold;
+  }
+  .linksContainer a {
+    color: var(--color-tertiary);
+    font-weight: bold;
+    font-size: var(--fs-base);
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+  /*****    IMG + Icon Styling    *****/
+  .cardIcon {
+    cursor: unset;
+    width: clamp(2.188rem, 1.979rem + 0.926vw, 2.813rem);
+    height: clamp(2.188rem, 1.979rem + 0.926vw, 2.813rem);
+    background-image: url("/images/svgs/paymentOption.svg");
+  }
+  .facebookIcon,
+  .instagramIcon {
+    width: 60px;
+    height: 60px;
+  }
+  .facebookIcon {
+    background-image: url("/images/svgs/facebookIcon.svg");
+  }
+  .instagramIcon {
+    background-image: url("/images/svgs/instagramIcon.svg");
+  }
+  .footerLogo img {
+    width: clamp(9.375rem, 7.292rem + 9.259vw, 15.625rem);
+    max-width: none;
+  }
+  /*****    Desktop Styling    *****/
+  @media screen and (min-width: 801px) {
+    /*****    Container Styling    *****/
+    .footerContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .linksContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .socialContainer {
+      justify-content: center;
+    }
+    .paymentOptions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .paymentOptionsMobile {
+      display: none;
+    }
+    .flex_col {
+      width: auto;
+      max-width: none;
+      margin: 0;
+      justify-self: center;
+    }
+    /*****    IMG + Icon Styling    *****/
+    .footerLogo {
+      position: absolute;
+      bottom: 10%;
+      right: 5%;
+    }
+    .linksContainer a:hover {
+      color: var(--color-secondary);
+    }
+    .facebookIcon:hover,
+    .instagramIcon:hover {
+      transform: scale(1.2);
+    }
+    .footerLogo:hover {
+      filter: brightness(10);
+    }
+  }
+</style>
