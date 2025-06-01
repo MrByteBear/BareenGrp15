@@ -1,0 +1,178 @@
+---
+const { heroContent, heroAltText, showElement } = Astro.props;
+---
+
+<header>
+  <nav>
+    <i class="burgerBtn"></i>
+    <div class="navLeft hideElement">
+      <a href="/productlist.html">Dame</a>
+      <a href="/productlist.html">Herre</a>
+      <a href="/productlist.html">Sport</a>
+      <a href="productlist.html" class="shopBtnMobile">Shop</a>
+    </div>
+    <a href="/index.html" class="headerLogo"><img src="/images/svgs/bareenLogo.svg" alt="Logo" /></a>
+    <div class="navRight">
+      <a href="productlist.html" class="shopBtn">Shop</a>
+      <i class="cartIcon"></i>
+    </div>
+  </nav>
+  <img src={heroContent} alt={heroAltText} class={`heroContainer hideElement ${showElement}`} />
+</header>
+
+<style>
+  /*****    Container Styling    *****/
+  header {
+    width: 100%;
+    background-color: var(--color-primary-dark);
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    width: 100%;
+    max-width: 1920px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  .navLeft.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 500;
+    width: 100%;
+    background-color: var(--color-primary-gray);
+    padding: 1rem;
+  }
+  .navLeft.active a:not(:last-child) {
+    color: var(--color-primary-dark);
+    font-weight: bold;
+    font-size: var(--fs-base);
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+  }
+  .headerLogo {
+    justify-self: center;
+  }
+  .navRight {
+    justify-self: end;
+  }
+  /*****    Button Styling    *****/
+  .shopBtn, .shopBtnMobile {
+    background-color: var(--color-secondary);
+    color: var(--color-primary-dark);
+    font-weight: bold;
+    font-size: var(--fs-base);
+    text-transform: uppercase;
+  }
+  .shopBtnMobile {
+    display: inline-block;
+    padding: 0.5rem 3rem;
+  }
+  .shopBtn {
+    display: none;
+  }
+  /*****    IMG + Icon Styling    *****/
+  .headerLogo img {
+    width: clamp(6.875rem, 5rem + 8.333vw, 12.5rem);
+    max-width: none;
+  }
+  .burgerBtn,
+  .burgerBtn.active {
+    width: 30px;
+    height: 30px;
+    justify-self: start;
+  }
+  .burgerBtn {
+    background-image: url("/images/svgs/burgerOpen.svg");
+  }
+  .burgerBtn.active {
+    background-image: url("/images/svgs/burgerClosed.svg");
+  }
+  .cartIcon {
+    width: clamp(1.875rem, 1.563rem + 1.389vw, 2.813rem);
+    height: clamp(1.875rem, 1.563rem + 1.389vw, 2.813rem);
+    background-image: url("/images/svgs/cartIcon.svg");
+  }
+  /*****    Desktop Styling    *****/
+  @media screen and (min-width: 801px) {
+    /*****    Container Styling    *****/
+    .burgerBtn {
+      display: none;
+    }
+    .navLeft {
+      justify-self: start;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .navRight {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    /*****    Text Styling    *****/
+    .navLeft a {
+      color: var(--color-primary);
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .navLeft a:hover {
+      color: var(--color-secondary);
+    }
+    /*****    IMG + Icon Styling    *****/
+    .headerLogo img:hover {
+      filter: brightness(0.5);
+    }
+    .cartIcon:hover {
+      filter: brightness(0.5);
+    }
+    /*****    Button Styling    *****/
+    .shopBtnMobile {
+      display: none;
+    }
+    .shopBtn {
+      display: inline-block;
+      padding: 0.7rem 3rem;
+    }
+    .shopBtn:hover {
+      color: var(--color-primary);
+      background-color: var(--color-secondary-alt);
+    }
+  }
+</style>
+
+<script defer>
+  document.addEventListener("DOMContentLoaded", () => {
+    const burgerBtn = document.querySelector(".burgerBtn");
+    const navLeft = document.querySelector(".navLeft");
+
+    burgerBtn.addEventListener("click", () => {
+      navLeft.classList.toggle("active");
+      burgerBtn.classList.toggle("active");
+    });
+
+    navLeft.addEventListener("click", disableBurger);
+    function disableBurger() {
+      if (navLeft.classList.contains("active")) {
+        navLeft.classList.remove("active");
+        burgerBtn.classList.remove("active");
+      }
+    }
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 800 && navLeft.classList.contains("active")) {
+        navLeft.classList.remove("active");
+        burgerBtn.classList.remove("active");
+        navLeft.removeEventListener("click", disableBurger);
+      }
+    });
+  });
+</script>

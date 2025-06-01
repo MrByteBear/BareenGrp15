@@ -117,15 +117,13 @@ a {
 
 /* 
   - Sets the default color of links in various states to be the color specified in other rulesets / parent elements
-  - Disabled by default (uncomment to enable if needed)  
 */
-/* 
 a:visited,
 a:active,
 a:hover {
   color: initial;
 }
-*/
+
 
 /* Removes list-style bulletpoints etc. */
 li {
