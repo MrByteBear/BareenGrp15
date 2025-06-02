@@ -1,0 +1,148 @@
+---
+import Layout from "../layouts/GlobalLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+
+const url = "https://qgizzpaszqucmckwvpup.supabase.co/rest/v1/BareenOpgDB";
+const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnaXp6cGFzenF1Y21ja3d2cHVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyMjU5NDYsImV4cCI6MjA2MzgwMTk0Nn0.iP-kWMQIma9HrokaS9nz8ZgIw9ikVZClNQJLxtY3Pvc";
+
+const options = {
+  headers: {
+    apikey: key,
+  },
+};
+
+const request = await fetch(url, options);
+const data = await request.json();
+
+const selectedProducts = data;
+---
+
+<Layout title="Produktliste">
+  <div class="textContainer">
+    <h1>Vores Produkter</h1>
+    <p>Her kan du finde dit ynglingswear, som vi har skræddersyet til dit behov. Med vores katalog som vi har lavet i samarbejdet med Fitness X, kan du lige nu finde stillet, komfortabelt og bæredygtigt atletisk casual wear! Vi garantere 100% tilfredshed med vores produkter.</p>
+  </div>
+  <div class="filterContainer">
+    <div class="searchBar">
+      <input type="text" placeholder="Søg efter ..." class="searchInput" />
+      <i class="searchIcon"></i>
+    </div>
+    <div class="optionsContainer">
+      <div class="filterBtn">
+        <button type="button">Filtrer</button>
+        <i class="filterIcon"></i>
+      </div>
+      <div class="sortBtn">
+        <button type="button">Sorter</button>
+        <i class="sortIcon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="productContainer">
+    {
+      selectedProducts.map((product) => {
+        return <ProductCard data={product} />;
+      })
+    }
+  </div>
+</Layout>
+
+<style>
+  /*****    Container Styling    *****/
+  .textContainer {
+    padding: 2rem 1rem;
+  }
+  .productContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 1rem;
+    max-width: 1088px;
+  }
+  .productContainer div {
+    flex: 1 0 260px;
+  }
+  .filterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .searchBar,
+  .filterBtn,
+  .sortBtn {
+    position: relative;
+  }
+  .optionsContainer {
+    display: flex;
+    gap: 1rem;
+  }
+  /*****    Text Styling    *****/
+  .textContainer h1 {
+    font-size: var(--fs-2xl);
+    font-weight: bold;
+  }
+  .textContainer p {
+    max-width: 65ch;
+  }
+  /*****    IMG + Icon Styling    *****/
+  .searchIcon,
+  .filterIcon,
+  .sortIcon {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0;
+    transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .searchIcon {
+    background-image: url("/images/svgs/searchIcon.svg");
+  }
+  .filterIcon {
+    background-image: url("/images/svgs/filterIcon.svg");
+  }
+  .sortIcon {
+    background-image: url("/images/svgs/sortIcon.svg");
+  }
+  /*****    Button Styling    *****/
+  .filterBtn button,
+  .sortBtn button {
+    width: 120px;
+    height: 50px;
+    padding: 0.5rem 0.5rem 0.5rem 3rem;
+    border: 0.25rem solid var(--color-primary-dark);
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .searchInput {
+    width: 260px;
+    height: 50px;
+    padding: 0.5rem 0.5rem 0.5rem 3rem;
+    border: 0.25rem solid var(--color-primary-dark);
+    background-color: var(--color-primary-gray);
+  }
+  /*****    Misc Styling    *****/
+  :global(main) {
+    padding: 2rem 0rem;
+    gap: 3rem;
+  }
+  :global(p) {
+    hyphens: none;
+  }
+  /*****    Desktop Styling    *****/
+  @media screen and (min-width: 801px) {
+    .filterContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1088px;
+  }
+    .filterBtn button,
+  .sortBtn button {
+    width: 200px;
+  }
+  }
+ </style>

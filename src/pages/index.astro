@@ -16,7 +16,7 @@ const data = await request.json();
 
 const selectedIDs = [2, 5, 7, 3];
 
-const selectedProducts = data.filter((album) => selectedIDs.includes(album.id));
+const selectedProducts = data.filter((product) => selectedIDs.includes(product.id));
 
 console.log("data", data);
 ---
