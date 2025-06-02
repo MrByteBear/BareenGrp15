@@ -1,0 +1,51 @@
+---
+const { data } = Astro.props;
+---
+
+<article>
+  <h3>{data.ProductTitle}</h3>
+  <a href=`/singleview/${data.slug}`><img src={data.Image} alt=`${data.ProductTitle} Image` /></a>
+  <div class="flex_row">
+    <div class="flex_col">
+      <div class="colors">
+        {data.Color.map((color) => <span class="color" style={`background-color: ${color};`} />)}
+      </div>
+      <p>{data.Price} Kr</p>
+    </div>
+    <button type="button" class="addCart"></button>
+  </div>
+</article>
+
+<style>
+  h3 {
+    margin-bottom: 1rem;
+  }
+  img {
+    margin-bottom: 1rem;
+    width: 260px;
+    height: 320px;
+  }
+  .flex_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .flex_col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .colors {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .colors span {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .flex_col p {
+    font-weight: bold;
+    font-size: var(--fs-base);
+  }
+
+</style>
