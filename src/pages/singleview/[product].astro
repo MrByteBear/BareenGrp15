@@ -1,0 +1,111 @@
+---
+import Layout from "../../layouts/GlobalLayout.astro";
+
+export async function getStaticPaths() {
+  const url = "https://qgizzpaszqucmckwvpup.supabase.co/rest/v1/BareenOpgDB";
+  const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnaXp6cGFzenF1Y21ja3d2cHVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyMjU5NDYsImV4cCI6MjA2MzgwMTk0Nn0.iP-kWMQIma9HrokaS9nz8ZgIw9ikVZClNQJLxtY3Pvc";
+
+  const options = {
+    headers: {
+      apikey: key,
+    },
+  };
+
+  const request = await fetch(url, options);
+  const data = await request.json();
+
+  return data.map((product) => {
+    return {
+      params: { product: product.slug },
+      props: { product },
+    };
+  });
+}
+const { product } = Astro.props;
+---
+
+<Layout title={product.ProductTitle}>
+  <div class="singleViewContainer">
+    <img src={product.Image} alt={`${product.ProductTitle} Image`} />
+    <div class="productInfo">
+      <h1>{product.ProductTitle}</h1>
+      <div class="colorContainer">
+        <h2>Colors:</h2>
+        <div class="colors">
+          {product.Color.map((color) => <span class="color" style={`background-color: ${color};`} />)}
+        </div>
+      </div>
+      <div class="sizeContainer">
+        <h2>Sizes:</h2>
+        <div class="sizes">
+          {product.Size.map((size) => <span class="sizeBox">{size}</span>)}
+        </div>
+      </div>
+      <p>{product.Price} Kr</p>
+    </div>
+    <button type="button" class="addCart"></button>
+  </div>
+</Layout>
+
+<style>
+  /*****    Container Styling    *****/
+  .singleViewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1rem;
+  }
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .colors,
+  .sizes {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .colors span {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .sizes span {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--color-primary-gray);
+    border: 1px solid var(--color-primary-dark);
+    text-align: center;
+    padding: 0.6rem 0rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  /*****    Text Styling    *****/
+  h1 {
+    font-size: var(--fs-2xl);
+  }
+  h2 {
+    font-size: var(--fs-lg);
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  .productInfo p {
+    font-weight: bold;
+    font-size: var(--fs-base);
+  }
+  /*****    IMG + Icon Styling    *****/
+  img {
+    width: clamp(18.75rem, 5.357rem + 35.714vw, 37.5rem);
+  }
+  /*****    Desktop Styling    *****/
+  @media screen and (min-width: 801px) {
+    .singleViewContainer {
+      flex-direction: row;
+      gap: 2rem;
+    }
+    .productInfo {
+      gap: 2rem;
+    }
+  }
+</style>

@@ -217,7 +217,7 @@ h6 {
 }
 
 /* Bodytext Font Family and Size */
-p {
+p, span {
   font-family: var(--font-family-sans);
   font-size: var(--fs-base);
 }
