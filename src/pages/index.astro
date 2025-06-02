@@ -1,8 +1,200 @@
 ---
-import Layout from '../layouts/GlobalLayout.astro';
+import Layout from "../layouts/GlobalLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+
+const url = "https://qgizzpaszqucmckwvpup.supabase.co/rest/v1/BareenOpgDB";
+const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnaXp6cGFzenF1Y21ja3d2cHVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyMjU5NDYsImV4cCI6MjA2MzgwMTk0Nn0.iP-kWMQIma9HrokaS9nz8ZgIw9ikVZClNQJLxtY3Pvc";
+
+const options = {
+  headers: {
+    apikey: key,
+  },
+};
+
+const request = await fetch(url, options);
+const data = await request.json();
+
+const selectedIDs = [2, 5, 7, 3];
+
+const selectedProducts = data.filter((album) => selectedIDs.includes(album.id));
+
+console.log("data", data);
 ---
 
-<Layout title="Forside">
-  <h1>Hello World</h1>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo magni magnam, ut earum quis ipsam est cum error, deserunt repellat ex voluptatum voluptatem tempora. Dolores error velit deleniti commodi incidunt!</p>
+<Layout title="Forside" heroContent="/images/webp/heroImg.webp" heroAltText="heroImg" showElement="showElement">
+  <img src="/images/webp/collabLogo.webp" alt="Collab Logo" class="spacing" />
+  <p class="introText spacing">Når mode møder fitness, sker der noget særligt. Bareen og FitnessX har slået kræfterne sammen for at skabe en kollektion, der kombinerer bæredygtige materialer med funktionelt design – perfekt til både træning og hverdagsbrug. Bareen er kendt for økologisk tøj med fokus på detaljer og tidløs æstetik. FitnessX er stedet, hvor træning handler lige så meget om fællesskab som om sved på panden. Sammen hylder vi det aktive liv med ansvar og nærvær. Det her er mere end bare tøj. Det er en holdning. Til din krop. Til planeten. Til hinanden. Gå på opdagelse i kollektionen – og husk: træning er altid sjovere, når du tager en ven med.</p>
+  <div class="bannerContainer">
+    <img src="/images/webp/banner.webp" alt="Banner Image" />
+    <a href="productlist.html" class="bannerBtn">Shop Collab</a>
+  </div>
+  <h1>Anbefalet Activewear</h1>
+  <div class="productContainer">
+    {
+      selectedProducts.map((product) => {
+        return <ProductCard data={product} />;
+      })
+    }
+  </div>
+  <section class="dualBannerContainer">
+    <h2>Se Mere</h2>
+    <div class="flex_row">
+      <div class="bannerContainer">
+        <img src="/images/webp/pants.webp" alt="Female Clothes" />
+        <a href="productlist.html" class="bannerBtn">Shop Dame</a>
+      </div>
+      <div class="bannerContainer">
+        <img src="/images/webp/t-shirt.webp" alt="Male Clothes" />
+        <a href="productlist.html" class="bannerBtn">Shop Herre</a>
+      </div>
+    </div>
+  </section>
+  <section class="historyContainer" id="omos">
+    <div class="textContainer">
+      <h3 class="spacing">Bareens Historie</h3>
+      <div class="coloredTextBox">
+        <h4>Om os</h4>
+        <p>Vi startede med ét enkelt mål: At bevise, at ansvarlig mode ikke behøver gå på kompromis med stil. Bareen blev født ud af ønsket om at skabe tøj, der føles rigtigt – for kroppen, for øjet og for planeten. Vi designer med ro og omtanke. Vi producerer med respekt for mennesker og natur. Og vi tror på, at æstetik og etik sagtens kan gå hånd i hånd. Vores kollektioner er lavet af økologiske og genanvendte materialer, produceret i små oplag, og skabt til at holde – i både form og udtryk. Vi er ikke et modebrand, der jagter trends. Vi bygger på værdier. Slow fashion. Clean lines. Real impact. Bareen – bæredygtighed med stil.</p>
+      </div>
+    </div>
+    <div class="historyImgContainer">
+      <img src="/images/webp/omos.webp" alt="Om Os Image" />
+      <a href="index.html#omos" class="bannerBtn">Læs Mere</a>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /*****    Container Styling    *****/
+  .bannerContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  .productContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 1rem;
+  }
+  .productContainer div {
+    flex: 1 0 260px;
+  }
+  .dualBannerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--color-primary-gray);
+    padding-top: 2rem;
+  }
+  .dualBannerContainer .bannerContainer {
+    padding-bottom: 2rem;
+  }
+  .coloredTextBox {
+    padding: 1rem 3rem 2rem;
+    background-color: var(--color-primary-gray-alt);
+  }
+  .historyContainer {
+    display: flex;
+    flex-direction: column;
+  }  
+  /*****    Text Styling    *****/
+  h1 {
+    font-size: var(--fs-2xl);
+  }
+  h2 {
+    font-size: var(--fs-xl);
+  }
+  h3 {
+    font-size: var(--fs-lg);
+  }
+  h4 {
+    font-size: var(--fs-md);
+  }
+  .introText {
+    max-width: 73.4ch;
+  }
+  .coloredTextBox p {
+    max-width: 73.4ch;
+  }
+  .textContainer h3 {
+    margin-bottom: 1rem;
+  }
+
+  /*****    Button Styling    *****/
+  .bannerBtn {
+    display: block;
+    width: fit-content;
+    margin: 0.5rem auto 0;
+    padding: 0.5rem 1rem;
+    border: 0.25rem solid var(--color-secondary-alt);
+    color: var(--color-primary-dark);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .historyImgContainer .bannerBtn {
+    border: none;
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+  }
+  /*****    IMG + Icon Styling    *****/
+  .bannerContainer img {
+    width: 100%;
+  }
+  /*****    Misc Styling    *****/
+  .spacing {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  :global(main) {
+    padding: 2rem 0rem;
+    gap: 3rem;
+  }
+  :global(p) {
+    hyphens: none;
+  }
+  /*****    Desktop Styling    *****/
+  @media screen and (min-width: 801px) {
+    .bannerBtn {
+      position: absolute;
+      bottom: 1rem;
+      left: 2rem;
+      border: 0.25rem solid var(--color-secondary-alt);
+      color: var(--color-primary);
+      font-weight: bold;
+      padding: 0.75rem 1rem;
+      text-transform: uppercase;
+    }
+    .flex_row {
+      display: flex;
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 0 3rem;
+    }
+
+    .flex_row .bannerContainer .bannerBtn {
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--color-primary-dark);
+    }
+    .historyContainer {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      align-items: center;
+    }
+    .historyImgContainer {
+      position: relative;
+      width: 100%;
+      max-width: 1920px;
+    }
+    .historyImgContainer .bannerBtn {
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+  }
+  }
+</style>
